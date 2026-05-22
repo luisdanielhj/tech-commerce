@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react'
+import { useEffect, useState, type FormEvent } from 'react'
 import logoMark from './assets/logo-mark.jpeg'
 import logoFull from './assets/logo-full.jpeg'
 import { images } from './assets/images'
@@ -28,7 +28,7 @@ function App() {
   useReveal()
   const { locale, setLocale, t } = useLocale()
   const [showMsg, setShowMsg] = useState(false)
-  const formKey = useRef(0)
+  const [formKey, setFormKey] = useState(0)
 
   useEffect(() => {
     if (!showMsg) return
@@ -53,7 +53,7 @@ function App() {
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
     setShowMsg(true)
-    formKey.current += 1
+    setFormKey((k) => k + 1)
   }
 
   return (
@@ -74,16 +74,6 @@ function App() {
             <a href="#contact">{t.nav.contact}</a>
             <span className="lang">
               <a
-                className={locale === 'es' ? 'active' : undefined}
-                href="#"
-                onClick={(e) => {
-                  e.preventDefault()
-                  setLocale('es')
-                }}
-              >
-                ES
-              </a>
-              <a
                 className={locale === 'en' ? 'active' : undefined}
                 href="#"
                 onClick={(e) => {
@@ -92,6 +82,16 @@ function App() {
                 }}
               >
                 EN
+              </a>
+              <a
+                className={locale === 'es' ? 'active' : undefined}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault()
+                  setLocale('es')
+                }}
+              >
+                ES
               </a>
             </span>
           </nav>
@@ -321,7 +321,7 @@ function App() {
             </dl>
           </div>
 
-          <form key={formKey.current} className="quote reveal" onSubmit={handleSubmit}>
+          <form key={formKey} className="quote reveal" onSubmit={handleSubmit}>
             <div className="grid2">
               <div className="field">
                 <label htmlFor="f-name">{t.contact.nameLabel}</label>

@@ -5,7 +5,7 @@ import { es } from './translations/es'
 import type { Locale, Translations } from './types'
 
 const STORAGE_KEY = 'tech-commerce-locale'
-export const DEFAULT_LOCALE: Locale = 'es'
+export const DEFAULT_LOCALE: Locale = 'en'
 
 const translations: Record<Locale, Translations> = { es, en }
 
